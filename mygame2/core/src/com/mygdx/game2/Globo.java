@@ -13,7 +13,7 @@ public class Globo {
     float x, y, size;
     float speed;
     Color color;
-    int elegircolor = (int) (Math.random() * 2);
+    int elegircolor = (int) (Math.random() * 3);
 
 
     Globo(float x, float y, float size, float speed) {
@@ -22,11 +22,14 @@ public class Globo {
         this.size = size;
         this.speed = speed;
 
-        if (elegircolor==0){
+        if (elegircolor==1){
             texture = globoRed;
         }
-        else if (elegircolor==1){
+        else if (elegircolor==2){
             texture = globoGreen;
+        }
+        else if (elegircolor==3){
+            texture = globoBlue;
         }
         else {
             texture = globoBlue;
