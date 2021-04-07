@@ -10,10 +10,10 @@ import jdk.nashorn.internal.ir.WhileNode;
 
 public class BitmapFontScreen extends BaseScreen {
 
+
     BitmapFontScreen(MyGdxGame game) {
         super(game);
     }
-
     SpriteBatch spriteBatch;
     BitmapFont bitmapFont;
 
