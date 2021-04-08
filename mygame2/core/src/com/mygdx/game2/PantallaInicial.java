@@ -25,7 +25,6 @@ public class PantallaInicial extends BaseScreen {
         // Boton START
         ImageButton.ImageButtonStyle buttonStartStyle = new ImageButton.ImageButtonStyle();
         spriteBatch = new SpriteBatch();
-        background = new Texture("nieve.jpeg");
         buttonStartStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture("button_start_up.png")));
         buttonStartStyle.over = new TextureRegionDrawable(new TextureRegion(new Texture("button_start_over.png")));
 

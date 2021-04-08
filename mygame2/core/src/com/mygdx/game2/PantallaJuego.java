@@ -1,5 +1,7 @@
 package com.mygdx.game2;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -42,7 +44,7 @@ public class PantallaJuego extends BaseScreen {
         bitmapFont.getData().setScale(1);
         bitmapFont.setColor(new Color(0, 0, 0, 1));
 
-        background = new Texture("background.png");
+        background = new Texture("nieve2.jpg");
         ballonRed = new Texture("ballon_red.png");
         ballonGreen = new Texture("ballon_green.png");
         ballonBlue = new Texture("ballon_blue.png");
@@ -50,6 +52,16 @@ public class PantallaJuego extends BaseScreen {
     }
 
     private void update(float delta) {
+
+        for (int j = 0; j < arrayglobos.size(); j++) {
+            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+                if (Gdx.input.getX() == (int) arrayglobos.get(j).x && Gdx.input.getY()== (int) arrayglobos.get(j).y){
+                    System.out.println("FUNCIONA");
+                }
+            }
+        }
+
+
         int x = (int) (Math.random() * 639);
         int y = (int) (Math.random() * 200);
         int size = (int) (10 + (Math.random() * 50));
@@ -76,7 +88,8 @@ public class PantallaJuego extends BaseScreen {
                 arrayglobos.remove(j);
             }
         }
-        for (int j = 0; j < arrayglobos.size(); j++) {
+
+        for (int j = 0; j < arrayglobos.size(); j++) {                  
             if (puntuacion <-50){
                 velocidad= (int) 0.5;
             }
@@ -99,6 +112,7 @@ public class PantallaJuego extends BaseScreen {
     @Override
     public void render(float delta) {
         update(delta);
+
 
 
         spriteBatch.begin();
