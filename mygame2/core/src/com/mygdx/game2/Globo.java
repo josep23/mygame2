@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Globo {
 
+
+
     enum Color {ROJO, VERDE, AZUL}
 
     static Texture globoRed = new Texture("ballon_red.png");
@@ -13,14 +15,16 @@ public class Globo {
     float x, y, size;
     float speed;
     Color color;
+    boolean remove = false;
     int elegircolor = (int) (Math.random() * 3);
 
 
-    Globo(float x, float y, float size, float speed) {
+    Globo(float x, float y, float size, float speed,boolean remove) {
         this.x = x;
         this.y = y;
         this.size = size;
         this.speed = speed;
+        this.remove = remove;
 
         if (elegircolor==1){
             texture = globoRed;

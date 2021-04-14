@@ -30,8 +30,8 @@ public class PantallaJuego extends BaseScreen {
     }
 
     int puntuacion;
-    int velocidad =5;
-    int Random = (int) (Math.random()*10);
+    int velocidad = 5;
+    int Random = (int) (Math.random() * 10);
     float contadorSegundos;
     float contadorSegundosReset;
     ArrayList<Globo> arrayglobos = new ArrayList<Globo>();
@@ -53,26 +53,18 @@ public class PantallaJuego extends BaseScreen {
 
     private void update(float delta) {
 
-        for (int j = 0; j < arrayglobos.size(); j++) {
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-                if (Gdx.input.getX() == (int) arrayglobos.get(j).x && Gdx.input.getY()== (int) arrayglobos.get(j).y){
-                    System.out.println("FUNCIONA");
-                }
-            }
-        }
-
 
         int x = (int) (Math.random() * 639);
         int y = (int) (Math.random() * 200);
         int size = (int) (10 + (Math.random() * 50));
 
-        contadorSegundos +=delta;
-        contadorSegundosReset +=delta;
+        contadorSegundos += delta;
+        contadorSegundosReset += delta;
 
         //crea globos
-        if (contadorSegundos > velocidad && contadorSegundosReset > velocidad){
-            contadorSegundosReset =0;
-            Globo globo = new Globo (x, y, size , 1);
+        if (contadorSegundos > velocidad && contadorSegundosReset > velocidad) {
+            contadorSegundosReset = 0;
+            Globo globo = new Globo(x, y, size, 1, false);
 
             arrayglobos.add(globo);
 
@@ -83,27 +75,25 @@ public class PantallaJuego extends BaseScreen {
         }
         //quita puntos si llega al techo
         for (int j = 0; j < arrayglobos.size(); j++) {
-            if (arrayglobos.get(j).y>=479){
+            if (arrayglobos.get(j).y >= 479) {
                 --puntuacion;
                 arrayglobos.remove(j);
             }
         }
-
-        for (int j = 0; j < arrayglobos.size(); j++) {                  
-            if (puntuacion <-50){
-                velocidad= (int) 0.5;
-            }
-            else if (puntuacion <-40){
-                velocidad=(int) 1;
-            }else if (puntuacion <-30){
-                velocidad=(int) 2;
-            }else if (puntuacion <-20){
-                velocidad=(int) 3;
-            }else if (puntuacion <-10){
-                velocidad=(int) 4;
-            }
-            else if (puntuacion <-5){
-                velocidad=(int) 5;
+        //VELOCIDADES
+        for (int j = 0; j < arrayglobos.size(); j++) {
+            if (puntuacion > 50) {
+                velocidad = (int) 0.5;
+            } else if (puntuacion > 40) {
+                velocidad = (int) 1;
+            } else if (puntuacion > 30) {
+                velocidad = (int) 2;
+            } else if (puntuacion > 20) {
+                velocidad = (int) 3;
+            } else if (puntuacion > 10) {
+                velocidad = (int) 4;
+            } else if (puntuacion > 5) {
+                velocidad = (int) 5;
             }
         }
     }
@@ -112,8 +102,6 @@ public class PantallaJuego extends BaseScreen {
     @Override
     public void render(float delta) {
         update(delta);
-
-
 
         spriteBatch.begin();
         spriteBatch.draw(background, 0, 0, 640, 480);
@@ -124,12 +112,23 @@ public class PantallaJuego extends BaseScreen {
             spriteBatch.draw(arrayglobos.get(i).texture, arrayglobos.get(i).x, arrayglobos.get(i).y, arrayglobos.get(i).size, arrayglobos.get(i).size);
         }
 
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            int gdxX = Gdx.input.getX();
+            int gdxY = Gdx.graphics.getHeight() - Gdx.input.getY();
+                for (Globo globo : arrayglobos) {
+                    if (globo.x <= gdxX && globo.x + globo.size >= gdxX && globo.y <= gdxY && globo.y + globo.size >= gdxY) {
+                        globo.remove = true;
+                        puntuacion++;
+                    }
+                }
+                    arrayglobos.removeIf(globo -> globo.remove);
 
+        }
         System.out.println("Contador de segundos " + contadorSegundos);
         System.out.println("Contador de segundosReset " + contadorSegundosReset);
-        System.out.println("ArrayGlobos "+ arrayglobos.size());
-        System.out.println("Puntuacion "+ puntuacion);
-        System.out.println("VELOCIDAD "+ velocidad);
+        System.out.println("ArrayGlobos " + arrayglobos.size());
+        System.out.println("Puntuacion " + puntuacion);
+        System.out.println("VELOCIDAD " + velocidad);
         spriteBatch.end();
     }
 }
