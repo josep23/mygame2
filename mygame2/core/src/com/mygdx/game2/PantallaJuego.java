@@ -20,7 +20,7 @@ public class PantallaJuego extends BaseScreen {
     }
 
     SpriteBatch spriteBatch;
-    Texture background, ballonRed, ballonGreen, ballonBlue;
+    Texture background, ballonRed, ballonGreen, ballonBlue , ballonyellow , ballonblanco , ballonnaranja , ballonnegro ,ballonrainbow;
 
     int i;
 
@@ -48,6 +48,11 @@ public class PantallaJuego extends BaseScreen {
         ballonRed = new Texture("ballon_red.png");
         ballonGreen = new Texture("ballon_green.png");
         ballonBlue = new Texture("ballon_blue.png");
+        ballonblanco = new Texture("ballon_blanco.png");
+        ballonnaranja = new Texture("ballon_naranja.png");
+        ballonnegro = new Texture("ballon_negro.png");
+        ballonrainbow = new Texture("ballon_rainbow.png");
+        ballonyellow = new Texture("ballon_amarillo.png");
 
     }
 
@@ -85,15 +90,15 @@ public class PantallaJuego extends BaseScreen {
             if (puntuacion > 50) {
                 velocidad = (int) 0.5;
             } else if (puntuacion > 40) {
-                velocidad = (int) 1;
+                velocidad = 1;
             } else if (puntuacion > 30) {
-                velocidad = (int) 2;
+                velocidad = 2;
             } else if (puntuacion > 20) {
-                velocidad = (int) 3;
+                velocidad = 3;
             } else if (puntuacion > 10) {
-                velocidad = (int) 4;
+                velocidad =  4;
             } else if (puntuacion > 5) {
-                velocidad = (int) 5;
+                velocidad =  (int) 0.5;
             }
         }
     }
@@ -119,10 +124,10 @@ public class PantallaJuego extends BaseScreen {
                     if (globo.x <= gdxX && globo.x + globo.size >= gdxX && globo.y <= gdxY && globo.y + globo.size >= gdxY) {
                         globo.remove = true;
                         puntuacion++;
+                        System.out.println("CLICK");
                     }
                 }
-                    arrayglobos.removeIf(globo -> globo.remove);
-
+                arrayglobos.removeIf(globo -> globo.remove);
         }
         System.out.println("Contador de segundos " + contadorSegundos);
         System.out.println("Contador de segundosReset " + contadorSegundosReset);
