@@ -98,7 +98,7 @@ public class PantallaJuego extends BaseScreen {
             } else if (puntuacion > 10) {
                 velocidad =  4;
             } else if (puntuacion > 5) {
-                velocidad =  (int) 0.5;
+                velocidad =  (int) 5;
             }
         }
     }
